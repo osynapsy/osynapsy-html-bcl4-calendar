@@ -1,0 +1,25 @@
+{
+    "name": "osynapsy.net/osynapsy-html-bcl4-calendar",
+    "version": "0.1",
+    "homepage": "http://www.osynapsy.net/html-bcl4-calendar",
+    "type": "library",
+    "description": "Osynapsy calendar component implementation",
+    "keywords": ["Osynapsy", "Calendar component"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pietro Celeste",
+            "email": "p.celeste@osynapsy.net",
+            "homepage": "https://github.com/osynapsy/osynapsy-html-bcl4-calendar/wiki"
+        }
+    ],
+    "require": {
+        "php" : ">=7.2.0",
+        "osynapsy.net/osynapsy-html-bcl4" : "@stable"
+    },
+    "autoload" : {
+        "psr-4": {
+            "Osynapsy\\Bcl4\\Calendar\\": "src/Osynapsy/Bcl4/Calendar/"
+        }
+    }
+}
