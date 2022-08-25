@@ -48,8 +48,8 @@ class Calendar extends Component
     {
         parent::__construct('div', $id);
         $this->setClass('card border-0');
-        $this->requireJs('assets/Bcl4/Calendar/script.js');
-        $this->requireCss('assets/Bcl4/Calendar/style.css');
+        $this->requireJs('Bcl4/Calendar/script.js');
+        $this->requireCss('Bcl4/Calendar/style.css');
         $this->title = $title;
         $this->init();
     }
