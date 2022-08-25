@@ -1,5 +1,5 @@
 {
-    "name": "osynapsy.net/osynapsy-html-bcl4-calendar",
+    "name": "osynapsy/osynapsy-html-bcl4-calendar",
     "version": "0.1",
     "homepage": "http://www.osynapsy.net/html-bcl4-calendar",
     "type": "library",
@@ -15,7 +15,7 @@
     ],
     "require": {
         "php" : ">=7.2.0",
-        "osynapsy.net/osynapsy-html-bcl4" : "@stable"
+        "osynapsy/osynapsy-html-bcl4" : "@stable"
     },
     "autoload" : {
         "psr-4": {
