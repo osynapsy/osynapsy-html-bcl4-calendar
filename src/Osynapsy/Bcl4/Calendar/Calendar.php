@@ -11,9 +11,10 @@
 
 namespace Osynapsy\Bcl4\Calendar;
 
-use Osynapsy\Html\Component;
 use Osynapsy\Html\Tag;
-use Osynapsy\Ocl\HiddenBox;
+use Osynapsy\Html\DOM;
+use Osynapsy\Html\Component\AbstractComponent;
+use Osynapsy\Html\Component\InputHidden;
 use Osynapsy\Bcl4\Button;
 
 /**
@@ -21,7 +22,7 @@ use Osynapsy\Bcl4\Button;
  *
  * @author Pietro Celeste <p.celeste@osynapsy.net>
  */
-class Calendar extends Component
+class Calendar extends AbstractComponent
 {
     private $daysOfWeek = [
         'LUN',
@@ -57,9 +58,9 @@ class Calendar extends Component
     public function __construct($title = 'Calendar', $id = 'calendar')
     {
         parent::__construct('div', $id);
-        $this->setClass('card border-0');
-        $this->requireJs('Bcl4/Calendar/script.js');
-        $this->requireCss('Bcl4/Calendar/style.css');
+        $this->addClass('card border-0');
+        $this->requireJs('bcl4/calendar/script.js');
+        $this->requireCss('bcl4/calendar/style.css');
         $this->title = $title;
         $this->init();
     }
@@ -73,9 +74,9 @@ class Calendar extends Component
         $this->today = new \DateTime('today');
     }
 
-    protected function __build_extra__(): void
+    public function preBuild(): void
     {
-        $this->add(new HiddenBox("{$this->id}_date"));
+        $this->add(new InputHidden("{$this->id}_date"));
         $this->buildHead();
         $this->buildBody();
     }
@@ -110,8 +111,8 @@ class Calendar extends Component
     {
         $date = clone $this->monthEnd;
         $btn = new Button('btn_next', '<i class="fa fa-arrow-right"></i>', 'btn-sm');
-        $btn->att('style', 'margin-top: -10px;');
-        $btn->att('onclick',"$('#{$this->id}_date').val('".($date->modify('+1 day')->format('Y-m-1'))."'); Osynapsy.refreshComponents(['{$this->id}']);");
+        $btn->attribute('style', 'margin-top: -10px;');
+        $btn->attribute('onclick',"$('#{$this->id}_date').val('".($date->modify('+1 day')->format('Y-m-1'))."'); Osynapsy.refreshComponents(['{$this->id}']);");
         return $btn;
     }
 
@@ -119,27 +120,27 @@ class Calendar extends Component
     {
         $date = clone $this->monthStart;
         $btn = new Button('btn_prev', '<i class="fa fa-arrow-left"></i>', 'btn-sm');
-        $btn->att('style', 'margin-top: -10px;');
-        $btn->att('onclick',"$('#{$this->id}_date').val('".($date->modify('-1 day')->format('Y-m-1'))."'); Osynapsy.refreshComponents(['{$this->id}']);");
+        $btn->attribute('style', 'margin-top: -10px;');
+        $btn->attribute('onclick',"$('#{$this->id}_date').val('".($date->modify('-1 day')->format('Y-m-1'))."'); Osynapsy.refreshComponents(['{$this->id}']);");
         return $btn;
     }
 
     protected function buildButtonToday()
     {
         $btn = new Button('btn_today', 'Oggi', 'border btn-sm');
-        $btn->att('style', 'margin-top: -10px;');
-        $btn->att('onclick',"$('#{$this->id}_date').val('".($this->today->format('Y-m-1'))."'); Osynapsy.refreshComponents(['{$this->id}']);");
+        $btn->attribute('style', 'margin-top: -10px;');
+        $btn->attribute('onclick',"$('#{$this->id}_date').val('".($this->today->format('Y-m-1'))."'); Osynapsy.refreshComponents(['{$this->id}']);");
         return $btn;
     }
 
     protected function buildBody()
     {
         $body = $this->add(new Tag('table', null, 'card-body p-0'));
-        $body->att('style',' table-layout: fixed; word-wrap: break-word;');
+        $body->attribute('style',' table-layout: fixed; word-wrap: break-word;');
         $row = $body->add(new Tag('thead'))->add(new Tag('tr', null, 'm-0'));
         for ($i = 0; $i < 7; $i++) {
             $row->add(new Tag('th', null, 'border text-center'))
-                ->att('style', 'width: 14.28%')
+                ->attribute('style', 'width: 14.28%')
                 ->add(new Tag('small'))
                 ->add($this->daysOfWeek[$i]);
         }
@@ -174,7 +175,7 @@ class Calendar extends Component
     {
         $cell = new Tag('td', null, 'border');
         $cell->add(new Tag('div', null, 'cell-head text-center p-1'))
-             ->add(new Tag('small', null, $classText))->att('style', 'font-size: 0.8em')
+             ->add(new Tag('small', null, $classText))->attribute('style', 'font-size: 0.8em')
              ->add($j);
         $cell->add(new Tag('div', null, 'cell-body'))->add('&nbsp;');
         $cell->add(new Tag('div', null, 'cell-body'))->add('&nbsp;');
