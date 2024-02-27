@@ -1,6 +1,6 @@
 {
     "name": "osynapsy/osynapsy-html-bcl4-calendar",
-    "version": "0.1",
+    "version": "0.2",
     "homepage": "http://www.osynapsy.net/html-bcl4-calendar",
     "type": "library",
     "description": "Osynapsy calendar component implementation",
